@@ -2,8 +2,8 @@
 
 const express = require('express');
 const dotenv = require('dotenv');
-const connectDB = require('./Config/db');
-const all = require('./Routes/auth'); // Replace the ESModules import
+const connectDB = require('db');
+const all = require('auth'); // Replace the ESModules import
 
 dotenv.config();
 connectDB();
