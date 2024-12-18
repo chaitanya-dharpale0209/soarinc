@@ -1,0 +1,9 @@
+crud for school with role base access and input validation  = done
+crud for class with role base access and input validation = done
+crud for student enrollments/transfer with role base access and input validation = 
+api documentation
+
+create mongodb atlas instance
+update .env
+push code to git hub
+deploye back end to render
