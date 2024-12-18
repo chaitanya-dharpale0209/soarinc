@@ -92,5 +92,5 @@ DELETE /api/schools/deleteschool/:id: Delete a school.
 Note: Set the Authorization header to Bearer <token> for protected routes.
 
 
-### *** api documentation link***
+## ** api documentation link**
 https://documenter.getpostman.com/view/24612054/2sAYJ1kh9i
