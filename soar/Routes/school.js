@@ -10,11 +10,11 @@ router.get('/', authMiddleware, rolemiddleware('superAdmin'), (req, res) => {
     res.json({ message: 'Access to all schools: Super Admin only' });
 });
 
-// Create a school (SuperAdmin only)
+
 router.post('/', authMiddleware, rolemiddleware('superAdmin'), async (req, res) => {
     const { name, address, contactNumber } = req.body;
 
-    // Validate input
+   
     const { error } = schoolValidationSchema.validate(req.body);
     if (error) return res.status(400).json({ message: error.details[0].message });
 
@@ -27,13 +27,13 @@ router.post('/', authMiddleware, rolemiddleware('superAdmin'), async (req, res) 
     }
 });
 
-// Create a new school (Superadmin only)
+
 router.post(
     '/createschools',
     authMiddleware,
     rolemiddleware('superAdmin'),
     async (req, res) => {
-        const { error } = schoolValidationSchema.validate(req.body); // Use `schoolValidationSchema` here
+        const { error } = schoolValidationSchema.validate(req.body); 
         if (error) return res.status(400).json({ message: error.details[0].message });
 
         try {
@@ -46,7 +46,7 @@ router.post(
     }
 );
 
-// Get all schools (SuperAdmin only)
+
 router.get('/getallschools', authMiddleware, rolemiddleware('superAdmin'), async (req, res) => {
     try {
         const schools = await School.find();
@@ -56,7 +56,7 @@ router.get('/getallschools', authMiddleware, rolemiddleware('superAdmin'), async
     }
 });
 
-// Get a single school by ID (SuperAdmin only)
+
 router.get('/getschoolbyid/:id', authMiddleware, rolemiddleware('superAdmin'), async (req, res) => {
     try {
         const school = await School.findById(req.params.id);
@@ -68,11 +68,11 @@ router.get('/getschoolbyid/:id', authMiddleware, rolemiddleware('superAdmin'), a
     }
 });
 
-// Update a school (SuperAdmin only)
+
 router.put('/updateschool/:id', authMiddleware, rolemiddleware('superAdmin'), async (req, res) => {
     const { name, address, contactNumber } = req.body;
 
-    // Validate input
+    
     const { error } = schoolValidationSchema.validate(req.body);
     if (error) return res.status(400).json({ message: error.details[0].message });
 
@@ -91,7 +91,7 @@ router.put('/updateschool/:id', authMiddleware, rolemiddleware('superAdmin'), as
     }
 });
 
-// Delete a school (SuperAdmin only)
+
 router.delete('/deleteschool/:id', authMiddleware, rolemiddleware('superAdmin'), async (req, res) => {
     try {
         const school = await School.findByIdAndDelete(req.params.id);

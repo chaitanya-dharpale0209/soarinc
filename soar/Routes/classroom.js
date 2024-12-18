@@ -23,8 +23,8 @@ router.post('/createclassrooms', authMiddleware, roleMiddleware('schoolAdmin'), 
 
 router.get('/getallclassrooms', authMiddleware, roleMiddleware('superAdmin', 'schoolAdmin'), async (req, res) => {
     try {
-        // If user is a superAdmin, get all classrooms
-        // If user is a schoolAdmin, filter by schoolId
+        // superAdmin: get all classrooms
+        //schoolAdmin: filter by schoolId
         const classrooms = req.user.role === 'superAdmin'
             ? await Classroom.find()
             : await Classroom.find({ schoolId: req.user.schoolId });
@@ -35,14 +35,14 @@ router.get('/getallclassrooms', authMiddleware, roleMiddleware('superAdmin', 'sc
     }
 });
 
-// Get a single classroom by ID (School Admin can access classrooms related to their school, SuperAdmin can access everything)
+
 router.get('/getclassbyid/:id', authMiddleware, roleMiddleware('superAdmin', 'schoolAdmin'), async (req, res) => {
     try {
         const classroom = await Classroom.findById(req.params.id);
 
         if (!classroom) return res.status(404).json({ message: 'Classroom not found' });
 
-        // Check if the classroom belongs to the user's school
+      
         if (req.user.role === 'schoolAdmin' && classroom.schoolId.toString() !== req.user.schoolId.toString()) {
             return res.status(403).json({ message: 'You do not have access to this classroom' });
         }
@@ -53,7 +53,7 @@ router.get('/getclassbyid/:id', authMiddleware, roleMiddleware('superAdmin', 'sc
     }
 });
 
-// Update Classroom (School Admin can update classrooms related to their school, SuperAdmin can update all)
+
 router.put('/updateclassroom/:id', authMiddleware, roleMiddleware('superAdmin', 'schoolAdmin'), async (req, res) => {
     const { error } = classroomValidationSchema.validate(req.body);
     if (error) return res.status(400).json({ message: error.details[0].message });
@@ -63,7 +63,7 @@ router.put('/updateclassroom/:id', authMiddleware, roleMiddleware('superAdmin', 
 
         if (!classroom) return res.status(404).json({ message: 'Classroom not found' });
 
-        // Checking if the classroom belongs to the user's school
+       
         if (req.user.role === 'schoolAdmin' && classroom.schoolId.toString() !== req.user.schoolId.toString()) {
             return res.status(403).json({ message: 'You do not have access to update this classroom' });
         }
@@ -75,14 +75,13 @@ router.put('/updateclassroom/:id', authMiddleware, roleMiddleware('superAdmin', 
     }
 });
 
-// Delete Classroom (according to our requirement School Admin can delete classrooms related to their school, SuperAdmin can delete all)
 router.delete('/deleteclassroom/:id', authMiddleware, roleMiddleware('superAdmin', 'schoolAdmin'), async (req, res) => {
     try {
         const classroom = await Classroom.findById(req.params.id);
 
         if (!classroom) return res.status(404).json({ message: 'Classroom not found' });
 
-        // Check if the classroom belongs to the user's school
+   
         if (req.user.role === 'schoolAdmin' && classroom.schoolId.toString() !== req.user.schoolId.toString()) {
             return res.status(403).json({ message: 'You do not have access to delete this classroom' });
         }
