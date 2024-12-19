@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const connectDB = require('./soar/Config/db'); // Change from import to require
-const { all } = require('./soar/Routes/auth'); // Change from import to require
+const connectDB = require('./soar/Config/db'); 
+const { all } = require('./soar/Routes/auth');
 
 dotenv.config();
 connectDB();
