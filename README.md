@@ -137,16 +137,4 @@ https://documenter.getpostman.com/view/24612054/2sAYJ1kh9i
 - **SchoolValidator**: Validates school data.
 - **ClassroomValidator**: Validates classroom data.
 
-Users
-  |
-  | Manages
-  v
-Schools
-  |
-  | Contains
-  v
-Classrooms
-  |
-  | Contains
-  v
-Students
+
