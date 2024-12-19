@@ -43,8 +43,8 @@ Follow the steps below to set up and run the project locally:
 
 ## **1. Clone the Repository**
 ```bash
-git clone <repository_url>
-cd <repository_name>
+git clone https://github.com/chaitanya-dharpale0209/soarinc.git
+cd soar
 ```
 
 ## **2. Install Dependencies**
