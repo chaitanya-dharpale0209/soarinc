@@ -153,10 +153,42 @@ Students
 
 
 **Users Collection**
-| Field        | Type     | Required | Notes                                      |
-|--------------|----------|----------|--------------------------------------------|
-| `name`       | String   | Yes      |                                            |
-| `email`      | String   | Yes      | Must be unique.                            |
-| `password`   | String   | Yes      |                                            |
-| `role`       | String   | Yes      | Enum: `superAdmin`, `schoolAdmin`.         |
-| `schoolId`   | ObjectId | No       | References the `School` collection.        |
+### Users Collection
+| Field      | Type     | Required | Notes                                      |
+|------------|----------|----------|--------------------------------------------|
+| `name`     | String   | Yes      |                                            |
+| `email`    | String   | Yes      | Must be unique.                            |
+| `password` | String   | Yes      |                                            |
+| `role`     | String   | Yes      | Enum: `superAdmin`, `schoolAdmin`.         |
+| `schoolId` | ObjectId | No       | References the `School` collection.        |
+
+---
+
+### Schools Collection
+| Field           | Type     | Required | Notes                                      |
+|------------------|----------|----------|--------------------------------------------|
+| `name`          | String   | Yes      | Name of the school.                       |
+| `address`       | String   | Yes      | Full address of the school.               |
+| `contactNumber` | String   | Yes      | Phone number for contacting the school.   |
+
+---
+
+### Classrooms Collection
+| Field       | Type          | Required | Notes                                      |
+|-------------|---------------|----------|--------------------------------------------|
+| `name`      | String        | Yes      | Name or identifier for the classroom.     |
+| `capacity`  | Number        | Yes      | Maximum number of students.               |
+| `resources` | Array[String] | Yes      | List of resources (e.g., projector).      |
+| `schoolId`  | ObjectId      | Yes      | References the `School` collection.       |
+
+---
+
+### Students Collection
+| Field               | Type     | Required | Notes                                      |
+|----------------------|----------|----------|--------------------------------------------|
+| `name`              | String   | Yes      | Name of the student.                      |
+| `email`             | String   | Yes      | Must be unique.                           |
+| `schoolId`          | ObjectId | Yes      | References the `School` collection.       |
+| `status`            | String   | Yes      | Enum: `enrolled`, `transferred`.          |
+| `transferToSchoolId`| ObjectId | No       | References the `School` collection.       |
+
