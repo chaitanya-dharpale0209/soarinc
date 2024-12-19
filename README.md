@@ -136,7 +136,7 @@ https://documenter.getpostman.com/view/24612054/2sAYJ1kh9i
 - **SchoolValidator**: Validates school data.
 - **ClassroomValidator**: Validates classroom data.
 
-## **design**
+
 Users
   |
   | Manages
@@ -150,3 +150,13 @@ Classrooms
   | Contains
   v
 Students
+
+
+**Users Collection**
+| Field        | Type     | Required | Notes                                      |
+|--------------|----------|----------|--------------------------------------------|
+| `name`       | String   | Yes      |                                            |
+| `email`      | String   | Yes      | Must be unique.                            |
+| `password`   | String   | Yes      |                                            |
+| `role`       | String   | Yes      | Enum: `superAdmin`, `schoolAdmin`.         |
+| `schoolId`   | ObjectId | No       | References the `School` collection.        |
