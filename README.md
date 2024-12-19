@@ -94,3 +94,59 @@ Note: Set the Authorization header to Bearer <token> for protected routes.
 
 ## ** api documentation link**
 https://documenter.getpostman.com/view/24612054/2sAYJ1kh9i
+
+
+
+## Database Design
+
+### 1. Users Collection
+- **Purpose**: Manages authentication and role-based access control.
+- **Fields**:
+  - `name` (String, required)
+  - `email` (String, required, unique)
+  - `password` (String, required)
+  - `role` (String, enum: `superAdmin`, `schoolAdmin`)
+  - `schoolId` (ObjectId, references `School`)
+
+### 2. Schools Collection
+- **Purpose**: Stores school information.
+- **Fields**:
+  - `name` (String, required)
+  - `address` (String, required)
+  - `contactNumber` (String, required)
+
+### 3. Students Collection
+- **Purpose**: Tracks student enrollment and transfers.
+- **Fields**:
+  - `name` (String, required)
+  - `email` (String, required, unique)
+  - `schoolId` (ObjectId, references `School`)
+  - `status` (String, enum: `enrolled`, `transferred`)
+  - `transferToSchoolId` (ObjectId, references `School`)
+
+### 4. Classrooms Collection
+- **Purpose**: Manages classrooms and resources.
+- **Fields**:
+  - `name` (String, required)
+  - `capacity` (Number, required)
+  - `resources` (Array of Strings, required)
+  - `schoolId` (ObjectId, references `School`)
+
+### Validators
+- **StudentValidator**: Validates student data.
+- **SchoolValidator**: Validates school data.
+- **ClassroomValidator**: Validates classroom data.
+
+Users
+  |
+  | Manages
+  v
+Schools
+  |
+  | Contains
+  v
+Classrooms
+  |
+  | Contains
+  v
+Students
