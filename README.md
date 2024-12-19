@@ -97,8 +97,7 @@ https://documenter.getpostman.com/view/24612054/2sAYJ1kh9i
 
 
 
-## Database Design
-
+## Database Design and Schema
 ### 1. Users Collection
 - **Purpose**: Manages authentication and role-based access control.
 - **Fields**:
@@ -137,4 +136,17 @@ https://documenter.getpostman.com/view/24612054/2sAYJ1kh9i
 - **SchoolValidator**: Validates school data.
 - **ClassroomValidator**: Validates classroom data.
 
-
+## **design**
+Users
+  |
+  | Manages
+  v
+Schools
+  |
+  | Contains
+  v
+Classrooms
+  |
+  | Contains
+  v
+Students
